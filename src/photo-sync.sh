@@ -25,6 +25,12 @@ load_config() {
         exit 1
     fi
 
+    # Validate ENABLE_HEALTH_CHECKS
+    if [ "$ENABLE_HEALTH_CHECKS" != "true" ] && [ "$ENABLE_HEALTH_CHECKS" != "false" ]; then
+        echo "Error: ENABLE_HEALTH_CHECKS must be true or false"
+        exit 1
+    fi
+
     # Create exclude patterns array
     IFS=' ' read -r -a EXCLUDE_ARRAY <<< "$EXCLUDE_PATTERNS"
     RSYNC_EXCLUDE=""
@@ -269,6 +275,10 @@ sync_changes() {
 
 # Enhanced health check function
 check_health() {
+    if [ "$ENABLE_HEALTH_CHECKS" != "true" ]; then
+        return 0
+    fi
+
     local current_time
     current_time=$(date +%s)
     if [ $((current_time - LAST_HEALTH_CHECK)) -lt "$HEALTH_CHECK_INTERVAL" ]; then
