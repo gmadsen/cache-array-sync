@@ -275,7 +275,7 @@ sync_changes() {
 
 # Enhanced health check function
 check_health() {
-    if [ "$ENABLE_HEALTH_CHECKS" != "true" ]; then
+if [ "$ENABLE_HEALTH_CHECKS" != "true" ]; then
         return 0
     fi
 
@@ -387,7 +387,7 @@ start_sync() {
     echo "Photo sync service started with PID $(cat "$PID_FILE"). Monitor log at $LOG_FILE"
 
     # Ensure cleanup on exit
-    trap 'cleanup_and_exit' EXIT
+trap 'cleanup_and_exit' EXIT
 }
 
 ####################### Main Script #######################
@@ -419,7 +419,8 @@ while getopts ":c:" opt; do
     esac
 done
 
-trap 'cleanup_and_exit' EXIT
+trap 'cleanup_and_exit' SIGTERM SIGINT SIGHUP
+
 # Process command line arguments
 case "$1" in
     start)
