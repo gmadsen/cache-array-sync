@@ -115,7 +115,7 @@
 
            /* Allocate memory for watch descriptors. */
 
-           wd = calloc(argc, sizeof(int));
+           wd = (int*)calloc(argc, sizeof(int));
            if (wd == NULL) {
                perror("calloc");
                exit(EXIT_FAILURE);

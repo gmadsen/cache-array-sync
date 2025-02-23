@@ -6,12 +6,10 @@
 
 
 #include "sync_manager.hpp"
+#include "configuration.hpp"
+#include "metrics_collector.hpp"
 
-SyncManager::SyncManager() {
-    // constructor
-}
-
-SyncManager::SyncManager(const std::shared_ptr<Configuration>& config, std::unique_ptr<MetricsCollector> metrics) : config(config), metrics(std::move(metrics)) {
+SyncManager::SyncManager(std::shared_ptr<Configuration> config, std::unique_ptr<MetricsCollector> metrics) : config(config), metrics(std::move(metrics)) {
     // constructor
 }
 

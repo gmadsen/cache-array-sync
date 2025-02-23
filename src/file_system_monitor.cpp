@@ -52,7 +52,7 @@ void FileSystemMonitor::addWatch(const std::string& path) {
     }
 
     size_t bufsiz = sizeof(struct inotify_event) + PATH_MAX + 1;
-    struct inotify_event* event = malloc(bufsiz);
+    struct inotify_event* event = (inotify_event*)malloc(bufsiz);
 
     /* wait for an event to occur */
     read(m_inotifyFd, event, bufsiz);
@@ -65,5 +65,5 @@ std::optional<FileSystemMonitor::FSEvent> FileSystemMonitor::getNextEvent() {
 }
 
 bool FileSystemMonitor::empty() {
-    return event_queue.empty();
+    return m_event_queue.empty();
 }
