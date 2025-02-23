@@ -1,7 +1,6 @@
 #!/bin/bash
 
-# Default config file location
-CONFIG_FILE="./photo-sync-debug.conf"
+
 
 # Function to load configuration
 load_config() {
@@ -13,11 +12,12 @@ load_config() {
 
 
     # Source the config file
-    # shellcheck source="./photo-sync-debug.conf"
+    # shellcheck source="./config/photo-sync-debug.conf"
     if ! source "$CONFIG_FILE"; then
         echo "Error: Failed to load configuration file $CONFIG_FILE"
         exit 1
     fi
+
 
     # Validate required settings
     if [ -z "$SOURCE_DIR" ] || [ -z "$DEST_DIR" ]; then
@@ -254,7 +254,7 @@ sync_changes() {
         echo $! > "$RSYNC_PID_FILE"
         wait $!
         
-        if [ $? -eq 0 ]; then
+        if wait $!; then
             success=true
             log_message "Sync completed successfully"
         else
@@ -387,21 +387,26 @@ start_sync() {
     echo "Photo sync service started with PID $(cat "$PID_FILE"). Monitor log at $LOG_FILE"
 
     # Ensure cleanup on exit
-    trap 'cleanup_and_exit' SIGTERM SIGINT SIGHUP
+    trap 'cleanup_and_exit' EXIT
 }
 
+####################### Main Script #######################
+
+# Default config file location
+CONFIG_FILE="$(pwd)/config/photo-sync-debug.conf"
 
 # Initialize LAST_HEALTH_CHECK
 LAST_HEALTH_CHECK=0
+
 # Load configuration before starting
-load_config
+trace load_config
 
 # Override config file location from command line
 while getopts ":c:" opt; do
     case $opt in
         c)
             CONFIG_FILE="$OPTARG"
-            load_config
+            trace load_config
             ;;
         \?)
             echo "Invalid option: -$OPTARG" >&2
@@ -414,26 +419,28 @@ while getopts ":c:" opt; do
     esac
 done
 
+trap 'cleanup_and_exit' EXIT
 # Process command line arguments
 case "$1" in
     start)
-        start_sync
+        debug_break "Before starting sync"
+        trace start_sync
+        debug_break "After starting sync"
         ;;
     stop)
-        stop_sync
+        trace stop_sync
         ;;
     status)
-        check_running
+        trace check_running
         ;;
     restart)
-        stop_sync
+        trace stop_sync
         sleep 2
-        start_sync
+        trace start_sync
         ;;
-        # Add to case statement in photo-sync.sh
     debug)
         if [ "$DEBUG_LEVEL" -ge 3 ]; then
-            dump_state
+            trace dump_state
             log_message "DEBUG: Running in debug mode"
             # Add any specific debug actions here
         else
@@ -445,5 +452,3 @@ case "$1" in
         exit 1
         ;;
 esac
-
-exit 0

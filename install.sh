@@ -29,6 +29,10 @@ setup_directories() {
     sudo mkdir -p /var/run/photo-sync
     sudo chown "$USER:$USER" /var/run/photo-sync
 
+    # Create metrics directory
+    sudo mkdir -p /var/run/photo-sync/metrics
+    sudo chown "$USER:$USER" /var/run/photo-sync/metrics
+
     # Create backup directories
     mkdir -p "$DEST_DIR"
     mkdir -p "$VERSIONS_DIR"

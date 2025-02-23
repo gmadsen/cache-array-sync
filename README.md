@@ -96,3 +96,72 @@ A robust photo backup and synchronization tool that maintains versioned backups 
 ./photo-sync.sh status   # Check if it's running
 ./photo-sync.sh restart  # Restart the service
 ./photo-sync.sh debug    # Debug mode
+
+## Metrics and Monitoring
+
+Photo Sync includes comprehensive metrics tracking and monitoring capabilities.
+
+### Available Metrics
+
+- `total_syncs`: Total number of sync operations performed
+- `failed_syncs`: Number of failed sync operations
+- `total_files_synced`: Total number of files synchronized
+- `total_bytes_synced`: Total data volume synchronized
+- `last_sync_duration`: Duration of the last sync operation
+
+### Prometheus Format Metrics
+
+Metrics are exposed in Prometheus format at `/var/run/photo-sync/metrics/*.prom`:
+
+### Health Monitoring
+
+The service includes comprehensive health checks:
+- CPU usage monitoring
+- Memory usage tracking
+- Disk space trending and prediction
+- Sync failure analysis
+- System resource monitoring
+
+### Status Reports
+
+# View the latest status report
+A detailed status report is generated after each sync operation:
+```bash
+cat /var/run/photo-sync/metrics/status_report.txt
+```
+
+     photo-sync start
+
+# Check sync status
+     ```bash
+photo-sync status
+     ```
+
+# View metrics
+     ```bash
+cat /var/run/photo-sync/metrics/status_report.txt
+     ```
+
+# Monitor disk usage trend
+     ```bash
+cat /var/run/photo-sync/metrics/disk_usage_history.txt
+     ```
+
+# Debugging and Troubleshooting
+1. Check sync status:
+```bash
+photo-sync status
+     ```
+
+
+2. View detailed metrics:
+```bash
+ls -l /var/run/photo-sync/metrics/
+     ```
+
+
+3. Monitor real-time changes:
+    ```bash
+tail -f /var/log/photo-sync.log
+    ```
+

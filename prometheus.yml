@@ -1,0 +1,8 @@
+# prometheus.yml
+scrape_configs:
+  - job_name: 'cache-sync'
+    static_configs:
+      - targets: ['localhost:9090']
+    file_sd_configs:
+      - files:
+        - '/var/run/cache-sync/metrics/*.prom'
