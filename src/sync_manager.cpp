@@ -43,4 +43,8 @@ void SyncManager::batchSync(const std::vector<std::string>& paths) {
     std::cout << std::endl;
 }
 
+void SyncManager::performConsistencyCheck() {
+    std::cout << "Performing consistency check" << std::endl;
+}
+
 // Created by garrett on 2/23/25.

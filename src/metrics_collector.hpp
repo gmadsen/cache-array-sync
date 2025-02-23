@@ -28,6 +28,8 @@ public:
 
     void recordMetric(const std::string& name, const std::string& value);
 
+    void collect();
+
 };
 
 
