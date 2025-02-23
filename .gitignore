@@ -18,5 +18,9 @@ debug/versions/photos/*
 debug/
 test/
 
+cmake-build-debug
+build
+.idea
+
 .vscode
 
