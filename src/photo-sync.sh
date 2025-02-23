@@ -12,7 +12,8 @@ load_config() {
 
 
     # Source the config file
-    # shellcheck source="./config/photo-sync-debug.conf"
+    # shellcheck source=./config/photo-sync-debug.conf
+    # shellcheck disable=SC1091
     if ! source "$CONFIG_FILE"; then
         echo "Error: Failed to load configuration file $CONFIG_FILE"
         exit 1
