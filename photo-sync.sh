@@ -1,15 +1,7 @@
 #!/bin/bash
 
-# Usage 
-# ./photo-sync.sh start    # Start the sync service
-# ./photo-sync.sh stop     # Stop the sync service
-# ./photo-sync.sh status   # Check if it's running
-# ./photo-sync.sh restart  # Restart the service
-
 # Default config file location
 CONFIG_FILE="./photo-sync-debug.conf"
-
-
 
 # Function to load configuration
 load_config() {
@@ -21,7 +13,7 @@ load_config() {
 
 
     # Source the config file
-    # shellcheck source=/home/garrett/projects/scripts/photo-sync-debug.conf
+    # shellcheck source="./photo-sync-debug.conf"
     if ! source "$CONFIG_FILE"; then
         echo "Error: Failed to load configuration file $CONFIG_FILE"
         exit 1
