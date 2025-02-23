@@ -1,0 +1,46 @@
+{
+    // Use IntelliSense to learn about possible attributes.
+    // Hover to view descriptions of existing attributes.
+    // For more information, visit: https://go.microsoft.com/fwlink/?linkid=830387
+    "version": "0.2.0",
+    "configurations": [
+        {
+            "type": "bashdb",
+            "request": "launch",
+            "name": "Bash-Debug (simplest configuration)",
+            "program":"${workspaceFolder}/photo-sync.sh",
+            "args": ["-c", "${input:configFile}", "${input:command}"],
+            "pathBash": "/bin/bash",
+            "env": {
+                "DEBUG_LEVEL": "3",
+                "DEBUG_TRACE": "1"
+            }
+        },
+
+    ],
+    "inputs": [
+        {
+            "type": "pickString",
+            "id": "configFile",
+            "description": "Select the configuration file",
+            "options": [
+                "./photo-sync.conf",
+                "./photo-sync-debug.conf"
+            ],
+            "default": "./photo-sync-debug.conf"
+        },
+        {
+            "type": "pickString",
+            "id": "command",
+            "description": "Select the command to run",
+            "options": [
+                "start",
+                "stop",
+                "status",
+                "restart",
+                "debug"
+            ],
+            "default": "start"
+        }
+    ]
+}

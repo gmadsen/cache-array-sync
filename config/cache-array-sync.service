@@ -1,0 +1,14 @@
+# config/photo-sync.service
+[Unit]
+Description=Photo Sync Service
+After=network.target
+
+[Service]
+Type=simple
+ExecStart=/usr/local/bin/photo-sync start
+ExecStop=/usr/local/bin/photo-sync stop
+User=your_user
+Restart=on-failure
+
+[Install]
+WantedBy=multi-user.target

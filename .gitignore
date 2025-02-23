@@ -1,11 +1,22 @@
 debug/photos/*
 debug/photos_backup/*
 debug/versions/photos/*
-debug/photo-sync.log
-debug/photo-sync.pid
-debug/photo-sync-rsync.pid
-debug/photo-sync.lock
+
+# Ignore actual config file, but not the example
+*.conf
+!*.conf.example
+
+# Ignore log files
+*.log
+*.log.*
+
+# Ignore pid and lock files
+*.pid
+*.lock
+
+# Ignore debug/test directories
+debug/
+test/
 
 .vscode
 
-photo-sync.conf
