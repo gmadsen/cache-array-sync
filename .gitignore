@@ -1,0 +1,11 @@
+debug/photos/*
+debug/photos_backup/*
+debug/versions/photos/*
+debug/photo-sync.log
+debug/photo-sync.pid
+debug/photo-sync-rsync.pid
+debug/photo-sync.lock
+
+.vscode
+
+photo-sync.conf
