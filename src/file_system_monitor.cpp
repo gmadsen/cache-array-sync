@@ -1,7 +1,9 @@
 //
 // Created by garrett on 2/23/25.
 //
-#include "src/file_system_monitor.hpp"
+#include "file_system_monitor.hpp"
+
+#include <iostream>
 #include <linux/limits.h>
 #include <sys/inotify.h>
 
@@ -33,6 +35,7 @@ FileSystemMonitor::FileSystemMonitor() : m_inotifyFd(inotify_init()) {
 }
 
 void FileSystemMonitor::removeWatch(const std::string& path) {
+    std::cout << path << std::endl;
 }
 
 
