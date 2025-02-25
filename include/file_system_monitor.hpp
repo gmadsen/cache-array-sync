@@ -12,6 +12,7 @@
 #include <chrono>
 #include <functional>
 #include <unordered_map>
+#include <optional>
 
 /// going to make a class that will monitor the file system for changes using the inotify API
 /// and will notify the user of any changes that occur

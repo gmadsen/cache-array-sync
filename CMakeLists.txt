@@ -46,7 +46,17 @@ FetchContent_MakeAvailable(googletest)
 # Add test directory
 add_subdirectory(tests)
 
-
-
 # Include the configuration header
 #include_directories(${PROJECT_SOURCE_DIR})
+
+add_library(sys INTERFACE)
+
+target_include_directories(sys
+    INTERFACE
+        ${CMAKE_CURRENT_SOURCE_DIR}/include
+)
+
+target_compile_features(sys
+    INTERFACE
+        cxx_std_20
+)
